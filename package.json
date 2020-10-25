@@ -1,0 +1,11 @@
+{
+  "name": "metodos-numericos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/matheusfcorreia/metodos-numericos.git",
+  "author": "Matheus <matheus.freitas@softcenter.com.br>",
+  "license": "MIT",
+  "dependencies": {
+    "mathjs": "^7.5.1"
+  }
+}
