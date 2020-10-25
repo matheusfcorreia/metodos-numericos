@@ -108,23 +108,23 @@ function gaussElimination(matrix) {
       auxLine = increasedMatrix[linePivo]
       increasedMatrix[linePivo] = increasedMatrix[biggerRowElem]
       increasedMatrix[biggerRowElem] = auxLine
-      memory.push({ acao: 'Pivotamento de linha', 'matrix': increasedMatrix.toString() })
+      memory.push({ acao: 'Pivotamento de linha', matrix: increasedMatrix.toString() })
     }
 
     pivo = increasedMatrix[linePivo][columnPivo]
-    memory.push({ acao: 'Pivô', 'pivo': pivo })
+    memory.push({ acao: 'Pivô', pivo })
 
     for (j = linePivo + 1; j < increasedMatrix.length; j++) {
       line = j
 
       lineMultiplier = math.divide(math.evaluate(increasedMatrix[line][columnPivo]), math.evaluate(pivo))
-      memory.push({ acao: `Multiplicador da linha ${line}`, 'matriz': lineMultiplier.toString() })
+      memory.push({ acao: `Multiplicador da linha ${line}`, matrix: lineMultiplier.toString() })
 
       increasedMatrix[line].forEach((lineElement, elemIndex) => {
         multiplication = math.multiply(lineMultiplier, increasedMatrix[linePivo][elemIndex])
         resultado = math.format(math.subtract(lineElement, multiplication))
         increasedMatrix[line][elemIndex] = resultado.split('/')[1] == '1' ? resultado.split('/')[0] : resultado
-        memory.push({ acao: `Operação com o elemento ${elemIndex} da linha ${line}`, 'matriz': increasedMatrix.toString() })
+        memory.push({ acao: `Operação com o elemento ${elemIndex} da linha ${line}`, matrix: increasedMatrix.toString() })
       });
     }
 
@@ -137,22 +137,22 @@ function gaussElimination(matrix) {
   for (i = 0; i < increasedMatrixAux.length; i++) {
     newVector.push(math.fraction(increasedMatrixAux[i].pop()))
     for (j = 0; j < increasedMatrixAux[i].length; j++) {
-      increasedMatrixAux[i][j] = math.fraction(increasedMatrixAux[i][j])
+      increasedMatrixAux[i][j] = math.fraction(increasedMatrixAux[i][j]);
     }
   }
 
-  expressions = system(increasedMatrixAux, newVector)
+  expressions = system(increasedMatrixAux, newVector);
 
-  solutions = math.usolve(increasedMatrixAux, newVector)
+  solutions = math.usolve(increasedMatrixAux, newVector);
 
   solutions.forEach((element, index) => {
     formatted = math.format(element).slice(1, -1)
     solutions[index] = formatted.split('/')[1] == '1' ? formatted.split('/')[0] : formatted
   })
-  memory.push({ acao: `Matriz Aumentada`, matriz: increasedMatrixAux.toString() })
-  memory.push({ acao: `Vetor b`, matriz: newVector.toString() })
-  memory.push({ acao: `Sistema`, memory: expressions })
-  memory.push({ acao: `Solução`, memory: solutions })
+  memory.push({ acao: `Matriz Aumentada`, matrix: increasedMatrixAux.toString() });
+  memory.push({ acao: `Vetor b`, matrix: newVector.toString() });
+  memory.push({ acao: `Sistema`, memory: expressions });
+  memory.push({ acao: `Solução`, memory: solutions });
 
   return {
     solutions,
