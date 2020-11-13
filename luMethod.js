@@ -122,8 +122,7 @@ function luMethod(matrixA, matrixB) {
     lSystem,
     lSolution,
     uSystem,
-    uSolution,
-    // memory
+    uSolution
   }
 }
 
