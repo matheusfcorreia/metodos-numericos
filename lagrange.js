@@ -1,11 +1,11 @@
-const { create, all } = require('mathjs');
-const math = create(all);
+// const { create, all } = require('mathjs');
+// const math = create(all);
 
-math.config({
-  number: 'Fraction'
-})
-
-const lagrange = (xPoints, yPoints, selectedPoint) => {
+const lagrange = async (xPoints, yPoints, selectedPoint) => {
+  math.config({
+    number: 'Fraction'
+  })
+  
   const memory = [];
   let polinomy = '0';
   const ls = [];
@@ -59,4 +59,22 @@ const lagrange = (xPoints, yPoints, selectedPoint) => {
   return { Polinomio: polinomy, 'Passo-a-Passo': memory, Resultado: resultToShow };
 }
 
-console.log(lagrange([0.5, 2.5, 4.5], [0.8, 1.1, 1.5], 3.5));
+// console.log(lagrange([0.5, 2.5, 4.5], [0.8, 1.1, 1.5], 3.5));
+
+document.querySelector("#btnCalcular").addEventListener('click', async () => {
+  const xPoints = [
+    Number(document.querySelector('#px1').value), 
+    Number(document.querySelector('#px2').value), 
+    Number(document.querySelector('#px3').value)
+  ];
+  const yPoints = [
+    Number(document.querySelector('#py1').value), 
+    Number(document.querySelector('#py2').value), 
+    Number(document.querySelector('#py3').value)
+  ];
+  const point = document.querySelector('#point').value;
+
+  const res = await lagrange(xPoints, yPoints, point);
+
+  document.querySelector('#result').value = res.Resultado;
+});

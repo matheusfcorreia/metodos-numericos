@@ -1,61 +1,6 @@
-const { create, all } = require('mathjs');
-const math = create(all);
-
-math.config({
-  number: 'Fraction'
-})
-
-
-const printMatrix = (matrix) => {
-  let print = '';
-
-  for (const row of matrix) {
-    let line = '';
-    for (const elem of row) {
-      elem.toString().length > 1 ? line += `${elem}  ` :
-        line += `${elem}   `
-    }
-    print += `${line} \n`
-  }
-
-  return print;
-}
-
-const matrixFromSystem = (system) => {
-  let matrix = [];
-  const vars = new Set();
-  for (const row of system) {
-    let matrixRow = [];
-    for (const elem of row) {
-      const variable = elem.match(/[a-zA-Z]/g);
-      if (elem.match(/\d/g)) {
-        if (variable) vars.add(variable[0]);
-        matrixRow.push(Number(elem.match(/[-+]*\d/g)[0]));
-      } else {
-        vars.add(variable[0]);
-        matrixRow.push(1);
-      }
-    }
-    matrix.push(matrixRow);
-  }
-
-  return { vars, matrix };
-}
-
-const getSystem = (systems) => {
-  const systemsArray = [];
-  for (const system of systems) {
-    let filteredSystem = system.replace(/\s[=]\s|\s[+-]\s/g, ' ');
-    filteredSystem = filteredSystem.split(/\s/g);
-    systemsArray.push(filteredSystem);
-  }
-
-  return systemsArray;
-}
-
-// const system = ['x + 2y + 3z = 1', '2x + y - z = -2', '9x - 2y + z = 2'];
-
-
+ const { create, all } = require('mathjs');
+ const math = create(all);
+ 
 function increasedMatrix(matrix, vector) {
   const increasedMatrix = []
   matrix.map((element) => increasedMatrix.push(element));
@@ -67,24 +12,27 @@ function increasedMatrix(matrix, vector) {
   return increasedMatrix;
 }
 
-function system(a, b){
+function system(a, b) {
   expressoes = []
   a.forEach((el, index) => {
-      expr = ''
-      for (i = index; i < el.length - 1; i++) {
-          expr += `+(${el[i]}) X${i + 1} `
-      }
-      expr += ` = (${b[index]})`
-      expressoes.push(expr)
+    expr = ''
+    for (i = index; i < el.length - 1; i++) {
+      expr += `+(${el[i]}) X${i + 1} `
+    }
+    expr += ` = (${b[index]})`
+    expressoes.push(expr)
   })
   return expressoes
 }
 
 function gaussElimination(matrix) {
+  math.config({
+    number: 'Fraction'
+  })
   memory = []
   increasedMatrix = matrix
 
-  memory.push({ acao: 'Inicio da matriz A', 'matriz': increasedMatrix.toString() })
+  memory.push({ acao: 'Inicio da matriz A', matrix: increasedMatrix.toString() })
 
   columnPivo = 0
   linePivo = 0
@@ -108,7 +56,7 @@ function gaussElimination(matrix) {
       auxLine = increasedMatrix[linePivo]
       increasedMatrix[linePivo] = increasedMatrix[biggerRowElem]
       increasedMatrix[biggerRowElem] = auxLine
-      memory.push({ acao: 'Pivotamento de linha', matrix: increasedMatrix.toString() })
+      memory.push({ acao: 'Pivotamento de linha', matrix: increasedMatrix.toString()})
     }
 
     pivo = increasedMatrix[linePivo][columnPivo]
@@ -162,8 +110,35 @@ function gaussElimination(matrix) {
 
 }
 
+async function getArrayFromRow(func) {
+  let aux = func;
+  const newArray = [];
+
+  aux = aux.split(/\s/gm);
+  aux.map((val) => {
+    if (val === '=' || val === '+' || val === '-') return;
+    newArray.push(val.replace(/[A-Za-z()]/gm, ''));
+  })
+
+  return newArray;
+}
+
 const matrix = [[2, 1, -1, -3], [1, 2, 1, 3], [1, 1, 1, 2]];
 
 const res = gaussElimination(matrix);
 
 console.log(res);
+// document.querySelector("#btnCalcular").addEventListener('click', async () => {
+//   const row1 = document.querySelector('#row1').value;
+//   const row2 = document.querySelector('#row2').value;
+//   const row3 = document.querySelector('#row3').value;
+//   const matrix = [await getArrayFromRow(row1), await getArrayFromRow(row2), await getArrayFromRow(row3)]
+
+//   const res = await gaussElimination(matrix);
+//   let logs = '';
+//   res.memory.map(val => {
+//     logs += val.acao.toString() + (val.matrix ? val.matrix : val.memory);
+//   })
+
+//   document.querySelector('#result-gauss').value = res.solutions;
+// })

@@ -1,11 +1,10 @@
-const { create, all } = require('mathjs');
-const math = create(all);
+// const { create, all } = require('mathjs');
+// const math = create(all);
 
-math.config({
-  number: 'Fraction'
-})
-
-const newton = (xPoints, yPoints, selectedPoint) => {
+const newton = async (xPoints, yPoints, selectedPoint) => {
+  math.config({
+    number: 'Fraction'
+  })
   const memory = [];
   let polinomy = 'd0';
   let differences = [];
@@ -36,8 +35,8 @@ const newton = (xPoints, yPoints, selectedPoint) => {
 
   const newDifferences = [];
   for (i = 0; i < differences.length - 1; i++) {
-    max = (differences[i + 1][max] > differences[i][max]) ? differences[i + 1][max] : differences[i][max];
-    min = (differences[i + 1][min] < differences[i][min]) ? differences[i + 1][min] : differences[i][min];
+    max = (differences[i + 1]['max'] > differences[i]['max']) ? differences[i + 1]['max'] : differences[i]['max'];
+    min = (differences[i + 1]['min'] < differences[i]['min']) ? differences[i + 1]['min'] : differences[i]['min'];
     difference = { 'valor': (differences[i + 1]['valor'] - differences[i]['valor']) / (max - min), max: max, min: min };
     memory.push(`Diferença dividida: x=${min} e y=${differences[i]['valor']} com x=${max} e y=${differences[i + 1]['valor']}. Resultado ${difference['valor']}`);
 
@@ -71,4 +70,22 @@ const newton = (xPoints, yPoints, selectedPoint) => {
   return { Polinomio: polinomy, 'Passo-a-Passo': memory, Resultado: result };
 }
 
-console.log(newton([0.5, 2.5, 4.5], [0.8, 1.1, 1.5], 3.5));
+// console.log(newton([0.5, 2.5, 4.5], [0.8, 1.1, 1.5], 3.5));
+
+document.querySelector("#btnCalcular").addEventListener('click', async () => {
+  const xPoints = [
+    Number(document.querySelector('#px1').value), 
+    Number(document.querySelector('#px2').value), 
+    Number(document.querySelector('#px3').value)
+  ];
+  const yPoints = [
+    Number(document.querySelector('#py1').value), 
+    Number(document.querySelector('#py2').value), 
+    Number(document.querySelector('#py3').value)
+  ];
+  const point = document.querySelector('#point').value;
+
+  const res = await newton(xPoints, yPoints, point);
+
+  document.querySelector('#result').value = res.Resultado;
+});

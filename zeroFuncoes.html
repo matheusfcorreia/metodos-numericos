@@ -1,0 +1,532 @@
+<html lang="en">
+
+<head>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-47049559-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-47049559-2');
+  </script>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="icon" href="/t/favicon.ico">
+
+  <title>Zero de Funções</title>
+  <!-- <link href="https://clevert.com.br/t/includes/learnbootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://clevert.com.br/t/includes/learnbootstrap/css/simple-sidebar.css" rel="stylesheet">
+  <link href="https://clevert.com.br/t/includes/learnbootstrap/font-awesome-4.3.0/css/font-awesome.min.css"
+    rel="stylesheet">
+
+  <script src="https://clevert.com.br/t/includes/js/mascara.js"></script>
+  <!-- LIB datetime (tipo calend�rio com data) -- >	
+      <link rel="stylesheet" type="text/css" href="https://clevert.com.br/t/includes/datetimepicker-master/jquery.datetimepicker.css"/>
+      <style type="text/css">.custom-date-style { background-color: red !important; } </style>
+      <!-- <script src="./jquery.js"></script> -- >
+      <script src="https://clevert.com.br/t/includes/datetimepicker-master/jquery.datetimepicker.js"></script>
+      <!-- FIM LIB datetime (tipo calend�rio com data) -->
+
+  <!-- Custom styles for this template -->
+  <link href="https://clevert.com.br/t/includes/css/style.css" rel="stylesheet">
+  <link href="https://clevert.com.br/t/includes/css/style_cmt.css" rel="stylesheet">
+
+  <!-- <script src="https://clevert.com.br/t/includes/js/jquery-1.10.2.js"></script> -->
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"
+    integrity="sha256-C6CB9UYIS9UJeqinPHWTHVqh/E1uhG5Twh+Y5qFQmYg=" crossorigin="anonymous"></script>
+
+  <!-- LIB datetime (tipo calend�rio com data) -- >	
+      <link rel="stylesheet" type="text/css" href="https://clevert.com.br/t/includes/datetimepicker-master/jquery.datetimepicker.css"/>
+      <style type="text/css">.custom-date-style { background-color: red !important; } </style>
+      <!-- <script src="./jquery.js"></script> -- >
+      <script src="https://clevert.com.br/t/includes/datetimepicker-master/jquery.datetimepicker.js"></script>
+      <!-- FIM LIB datetime (tipo calend�rio com data) -->
+
+  <!-- <script src="https://clevert.com.br/t/includes/learnbootstrap/js/bootstrap.min.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <!-- para o calendário jquery -->
+  <!-- <link rel="stylesheet" href="https://clevert.com.br/t/includes/jquery-ui-1.11.1/jquery-ui.css"> -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <!-- <script src="https://clevert.com.br/t/includes/jquery-ui-1.11.1/jquery-ui.js"></script> -->
+  <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"
+    integrity="sha256-4JY5MVcEmAVSuS6q4h9mrwCm6KNx91f3awsSQgwu0qc=" crossorigin="anonymous"></script>
+  <!-- FIM para o calendário jquery -->
+
+  <style type="text/css">
+    .panel-info {
+      background-color: #fcf8e3;
+      border-color: #faebcc;
+    }
+
+    @media (max-width: 700px) {
+      #page-content-wrapper {
+        padding: 0px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="content">
+    <div class="navbar-fixed-top">
+    </div>
+
+    </script>
+
+
+    <style>
+      textarea.form-control {
+        height: 200px;
+        /*    max-width: 700px; */
+      }
+
+      #div-header {
+        display: none;
+      }
+
+      input.base {
+        width: 70%;
+      }
+
+      @media (max-width: 400px) {
+        input.base {
+          width: 60%;
+        }
+      }
+    </style>
+
+    <div class="col-xs-12 col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Calculadora de Zero de Funções</h3>
+        </div>
+        <div class="panel-body" style="margin-bottom: 10;">
+          <div class="tabs-container">
+            <div class="tab" id="tab1">Gauss</div>
+            <div class="tab" id="tab2">LU</div>
+            <div class="tab" id="tab3">Interpolação Newton</div>
+            <div class="tab" id="tab4">Interpolação Lagrange</div>
+            <div class="tab tab-highlight" id="tab5">Zero de Funções</div>
+          </div>
+          <br>
+          <br>
+          <b>Insira a equação no campo abaixo com as operações separadas por espaço.
+            <br>Ex:</b> <i>&nbsp; 2.7182^x+x&nbsp;&nbsp; =&nbsp;&nbsp; 2.7182^x + x</i>
+          <br>
+          <br> <b>A potenciação deve ser representada como</b> <i>base^expoente</i>, <b>além de toda a
+            <br>separação padrão por parenteses (se necessário).</b>
+          <br>
+          <br>
+
+          <br>
+          <div style="display: inline-flex;">
+            <div style="display: grid; margin-right: 80px; text-align: center;">
+              <label for="number_bin">Condição de Parada</label>
+              <input name="number_bin" id="parada" class="input-variables" type="text" maxlength="50">
+            </div>
+            <br>
+
+            <div style="display: grid; text-align: center;">
+              <label for="number_oct">Função</label>
+              <input name="number_oct" id="funcao" class="input-variables" type="text">
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+          <div style="display: inline-flex; text-align: center;">
+            <div style="display: grid; margin-right: 125px;">
+              <label>Método</label>
+              <select name="metodos" id="metodo">
+                <option value="Newton">Método de Newton</option>
+                <option value="Bisseccao">Método da Bisseccao</option>
+              </select>
+            </div>
+            <div style="display: grid;">
+              <label>Chute Inicial ou Intervalo</label>
+              <input id="var-inicial" for="number_oct" class="input-variables">
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="result-container">
+            <div style="margin-top: 32px">
+              <div class="btn-group" role="group" style="display: inline;">
+                <button id="btnCalcular" type="button" class="btn btn-primary">Calcular</button>
+                <button id="btnLimpar" type="button" class="btn btn-primary">Limpar</button>
+              </div>
+            </div>
+
+            <div style="display: grid;">
+              <label for="number_oct">Resultado</label>
+              <input id="result" for="number_oct" class="result" disabled>
+            </div>
+            <div style="display: grid;">
+              <label for="number_oct">Repetições</label>
+              <input id="repeticoes" for="number_oct" class="result" disabled>
+            </div>
+          </div>
+
+          <!-- <div>##base_convert_dec_info##</div> -->
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- -->
+    <style>
+      .content {
+        margin-left: 30%;
+        width: 40%;
+        /* Valor da Largura */
+      }
+
+      .results-container {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .input-variables {
+        width: 200px;
+        border-width: 1px;
+        border-color: #9e9e9e;
+        text-align: center;
+      }
+
+      .tabs-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        justify-items: center;
+        margin-top: 10px;
+      }
+
+      .tab {
+        background-color: #bce8f1;
+        padding: 5px;
+      }
+      .tab-highlight {
+        background-color: #83dcef;
+      }
+
+      .tab:hover {
+        background-color: #83dcef;
+        cursor: pointer;
+      }
+
+      .result {
+        margin-left: 10px;
+        width: 150px;
+        text-align: center;
+      }
+
+      .result-container {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .pass-label {
+        text-align: right;
+      }
+
+      .pass-value {
+        text-align: left;
+      }
+    </style>
+
+
+    <script>
+      $('#tab1').click(() => {
+        $('#tab2').removeClass('tab-highlight');
+        $('#tab3').removeClass('tab-highlight');
+        $('#tab4').removeClass('tab-highlight');
+        $('#tab1').addClass('tab-highlight');
+        window.location.assign('diretos-gauss.html');
+      })
+      $('#tab2').click(() => {
+        $('#tab1').removeClass('tab-highlight');
+        $('#tab3').removeClass('tab-highlight');
+        $('#tab4').removeClass('tab-highlight');
+        $('#tab2').addClass('tab-highlight');
+        window.location.assign('diretos-lu.html');
+      })
+      $('#tab3').click(() => {
+        $('#tab1').removeClass('tab-highlight');
+        $('#tab2').removeClass('tab-highlight');
+        $('#tab4').removeClass('tab-highlight');
+        $('#tab3').addClass('tab-highlight');
+        window.location.assign('interpolacao-newton.html');
+      })
+      $('#tab4').click(() => {
+        $('#tab1').removeClass('tab-highlight');
+        $('#tab2').removeClass('tab-highlight');
+        $('#tab3').removeClass('tab-highlight');
+        $('#tab4').addClass('tab-highlight');
+        window.location.assign('interpolacao-lagrange.html');
+      })
+      $('#tab5').click(() => {
+        $('#tab1').removeClass('tab-highlight');
+        $('#tab2').removeClass('tab-highlight');
+        $('#tab3').removeClass('tab-highlight');
+        $('#tab4').removeClass('tab-highlight');
+        $('#tab5').addClass('tab-highlight');
+      })
+
+      function calcularPotencia(potencia) {
+        try {
+          const partes = potencia.split('^');
+          return Math.pow(Number(partes[0]), Number(partes[1]));
+        } catch (erro) {
+          throw new Error(erro);
+        }
+      }
+
+      async function resolverFuncao(operacoes) {
+        try {
+          let funcao = '';
+          await operacoes.map(val => {
+            if (val.includes('^')) funcao += calcularPotencia(val).toString();
+            else funcao += val;
+          })
+
+          return await eval(funcao);
+        } catch (erro) {
+          throw new Error(erro);
+        }
+      }
+
+      async function separarFuncao(fx) {
+        return await fx.split(/\s/gm);
+      }
+
+      function calcularMedia(valor1, valor2) {
+        try {
+          return (valor1 + valor2) / 2;
+        } catch (erro) {
+          throw new Error(erro);
+        }
+      }
+
+      function selectInterval(res1, res2, res3) {
+        try {
+          const ordenado = [res1, res2, res3].sort((a, b) => a + b);
+          const newInterval = [];
+
+          if (ordenado[1] < 0) {
+            newInterval.push(ordenado[1]);
+            newInterval.push(ordenado[2]);
+          } else {
+            newInterval.push(ordenado[0]);
+            newInterval.push(ordenado[1]);
+          }
+
+          return newInterval;
+        } catch (erro) {
+          throw new Error(erro);
+        }
+      }
+
+      async function final(res, parada) {
+        try {
+          if (Array.isArray(res)) {
+            if (
+              await res[0].toFixed(parada.toString().length - 2) <= parada ||
+              await res[1].toFixed(parada.toString().length - 2) <= parada ||
+              await res[2].toFixed(parada.toString().length - 2) <= parada
+            )
+              return true;
+            return false;
+          } else {
+            res = Number(res.toString().replace('-', ''));
+
+            if (await res.toFixed(parada.toString().length - 2) <= parada) return true;
+            return false;
+          }
+        } catch (erro) {
+          throw new Error(erro);
+        }
+      }
+
+      async function bisseccao(stop, fx, varInicial) {
+        try {
+          const parada = calcularPotencia(stop);
+          let interval = varInicial.split(',');
+          let repeticoes = 0;
+
+          let funcAuxiliar, funcOperations, media, res1, res2, res3;
+          while (true) {
+            funcAuxiliar = fx.replace(/x/gm, `${interval[0]}`);
+            funcOperations = await separarFuncao(funcAuxiliar);
+            res1 = await resolverFuncao(funcOperations);
+
+            funcAuxiliar = fx.replace(/x/gm, interval[1]);
+            funcOperations = await separarFuncao(funcAuxiliar);
+            res2 = await resolverFuncao(funcOperations);
+
+            media = calcularMedia(interval[0], interval[1]);
+            funcAuxiliar = fx.replace(/x/gm, media);
+            funcOperations = await separarFuncao(funcAuxiliar);
+            res3 = await resolverFuncao(funcOperations);
+
+            repeticoes++;
+            if (await final([Math.abs(res1), Math.abs(res2), Math.abs(res3)], parada)) break;
+            interval = selectInterval(res1, res2, res3);
+          }
+          if (await final(Math.abs(res1), parada)) return { result: res1, repeticoes };
+          if (await final(Math.abs(res2), parada)) return { result: res2, repeticoes };
+          if (await final(Math.abs(res3), parada)) return { result: res3, repeticoes };
+        } catch (erro) {
+          alert(erro);
+        }
+      }
+
+      async function newton(stop, fx, varInicial) {
+        try {
+          const parada = calcularPotencia(stop);
+          let chute = Number(varInicial);
+          let repeticoes = 0;
+          let fxResolvida, funcAuxiliar, funcParts, funcNewton;
+          while (true) {
+            funcAuxiliar = fx.replace(/x/gm, `${chute}`);
+            funcParts = await separarFuncao(funcAuxiliar);
+            fxResolvida = await resolverFuncao(funcParts);
+
+            repeticoes++;
+            if (await final(Math.abs(fxResolvida), parada)) break;
+
+            funcNewton = `${chute} - ((${fxResolvida}) / ${2 * chute})`;
+            funcParts = await separarFuncao(funcNewton);
+            chute = await resolverFuncao(funcParts);
+          }
+          return { result: fxResolvida, repeticoes };
+        } catch (erro) {
+          alert(erro);
+        }
+      }
+
+      async function isAllFilled() {
+        if (
+          $("#var-inicial").val() === '' ||
+          $("#parada").val() === '' ||
+          $("#funcao").val() === '' ||
+          $("#parada").val() === ''
+        )
+          return false;
+        return true;
+      }
+
+      async function calcular() {
+        try {
+          const parada = $('#parada').val();
+          const fx = $('#funcao').val();
+          const varInicial = $('#var-inicial').val();
+          const metodo = $('#metodo').val();
+
+          switch (metodo) {
+            case 'Newton':
+              return newton(parada, fx, varInicial);
+              break;
+            case 'Bisseccao':
+              return bisseccao(parada, fx, varInicial);
+              break;
+          }
+        } catch (erro) {
+          alert(erro);
+        }
+      }
+
+      function clearNumbers() {
+        window.location.reload();
+      }
+
+      $('#btnCalcular').click(async () => {
+        if (await isAllFilled()) {
+          const res = await calcular();
+          setTimeout(() => {
+            $('#result').val(res.result.toFixed(5));
+            $('#repeticoes').val(res.repeticoes);
+          }, 500);
+        } else alert('Nem todos campos fora preenchidos');
+      })
+
+      $('#btnLimpar').click(() => {
+        clearNumbers();
+      })
+
+
+    </script>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="panel panel-info">
+        <div class="panel-body">
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <style>
+    @media (min-width:800px) {
+      #grid-divultacao-dir {
+        position: fixed;
+        right: 5px;
+        top: 55px;
+      }
+    }
+  </style>
+  <div class="hidden-xs col-sm-2 col-md-2 col-lg-3" id="grid-divultacao-dir">
+    <div id="ads-a-direita">
+
+    </div>
+  </div>
+
+  </div>
+  <!-- /#page-content-wrapper -->
+
+
+
+  </div>
+  <!-- /#wrapper -->
+  <script src="https://clevert.com.br/t/includes/js/scripts_cmt.js"></script>
+
+
+  <!-- *************MODAL PARA ESPERAR A CARREGAR ********************** -->
+  <style>
+    .modal-backdrop {
+      background-color: transparent;
+    }
+  </style>
+  <!-- Small modal -->
+  <div id="momodalLoading" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+    aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  </div>
+  <!-- ************* fim MODAL PARA ESPERAR A CARREGAR ********************** -->
+
+
+  </div>
+</body>
+
+</html>

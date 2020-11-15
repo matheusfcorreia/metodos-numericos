@@ -1,10 +1,3 @@
-const { create, all } = require('mathjs');
-const math = create(all);
-
-math.config({
-  number: 'Fraction'
-})
-
 function system(a, b){
   expressoes = []
   a.forEach((el, index) => {
@@ -19,6 +12,10 @@ function system(a, b){
 }
 
 function luMethod(matrixA, matrixB) {
+  math.config({
+    number: 'Fraction'
+  })
+
   memory = []
   increasedMatrix = matrixA
 
@@ -126,9 +123,30 @@ function luMethod(matrixA, matrixB) {
   }
 }
 
+async function getArrayFromRow(func) {
+  let aux = func;
+  const newArray = [];
 
-const matrix = [[2, 1, -1], [1, 2, 1], [1, 1, 1]];
-const vector = [-3, 3, 2];
+  aux = aux.split(/\s/gm);
+  aux.map((val) => {
+    if (val === '=' || val === '+' || val === '-') return;
+    const newVal = val.replace(/[A-Za-z()]/gm, '');
+    if (newVal) newArray.push(newVal);
+  })
 
-const res = luMethod(matrix, vector);
-console.log(res);
+  return newArray;
+}
+
+document.querySelector("#btnCalcular").addEventListener('click', async () => {
+  const row1 = document.querySelector('#row1').value;
+  const row2 = document.querySelector('#row2').value;
+  const row3 = document.querySelector('#row3').value;
+  const vector = await getArrayFromRow(document.querySelector('#vector').value);
+
+  const matrix = [await getArrayFromRow(row1), await getArrayFromRow(row2), await getArrayFromRow(row3)];
+  console.log('matrix', matrix);
+  console.log('vector', vector);
+  const res = luMethod(matrix, vector);
+
+  document.querySelector('#result-lu').value = res.lSolution;
+})
